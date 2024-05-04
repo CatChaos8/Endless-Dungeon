@@ -85,7 +85,11 @@ while running:
     screen.blit(menu_image, (0, 430))
     
     #Create the arrow
-    screen.blit(arrow, (0, 475))
+    screen.blit(arrow, (10, 475))
+    
+    screen.blit(arrow, (10, 545))
+    screen.blit(arrow, (210, 475))
+    screen.blit(arrow, (210, 545))
 
     #Write text
     render_text("Battle Test", font_title, (0, 0, 0), 300, 50)
@@ -114,7 +118,9 @@ while running:
 
 
 
-#Making the gam
+#Making the game run
+
+
 
 # Quit Pygame
 pygame.quit()
