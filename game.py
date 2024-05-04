@@ -157,9 +157,7 @@ while running:
         health_percent = 1
     if health_percent <=0 :
         health_percent = 0
-        health = 15
     health_color = ((255-(255*health_percent)),(255*health_percent),0)
-    health -= 1
     render_text(health_fraction, font_menu, (255, 255, 255), 670, 402)
 
     pygame.draw.rect(screen, health_color, (5, 397, health_bar_length, 25))
