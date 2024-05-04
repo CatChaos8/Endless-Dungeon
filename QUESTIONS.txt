@@ -1,0 +1,59 @@
+Question 1: If 5x - 24 = 11, what is the value of x?
+    A: 7
+B: 35
+C: 2
+D: 24
+
+Question 2: What is the largest planet in our solar system?
+A: Earth
+    B: Jupiter
+C: Neptune
+D: The Sun
+
+Question 3: What is 38% of 97?
+A: 55.42
+B: 38
+    C: 36.86
+D: 29.14
+
+Question 4: How do you find the resistance in a circut?
+A: Current * Voltage
+B: Current / Power
+C: Power * Voltage
+    D: Voltage / Current
+
+Question 5: What is the Capital of France?
+    A: Paris
+B: Toronto
+C: London
+D: Madrid
+
+Question 6: What is the chemical Symbol for Gold>
+A: Fe
+    B: Au
+C: Li
+D: O
+
+Question 7: What is the square root of 144?
+A: 8
+B: 16
+    C: 12
+D: 10
+
+Question 8: What is a characterisitic of a mammal?
+A: They have a circulatory and respiratory system.
+B: They lay eggs
+C: They have gills
+    D: They have fur or hair
+
+Question 9: When did World War 1 end?
+    A: 1918
+B: 1945
+C: 1914
+D: 1897
+
+Question 10: What is NOT a property of most metals
+A: They are very conductive
+    B: They are usually very brittle
+C: Usually solid at room temperature
+D: They are silver or grey in colour

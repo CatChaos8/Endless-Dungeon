@@ -1,2 +1,2 @@
 Hi
-This is a readme so it is cool.
+This is a readme So you should not read it.
