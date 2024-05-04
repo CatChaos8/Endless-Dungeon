@@ -1,7 +1,7 @@
 import pygame
 import sys
 import os
-
+import time
 # Initialize Pygame
 pygame.init()
 
@@ -20,7 +20,6 @@ def render_text(text, font, color, x, y):
     text_surface = font.render(text, True, color)
     screen.blit(text_surface, (x, y))
     
-    
 
 # Load player image
 assets_dir = os.path.join(os.path.dirname(__file__), 'assets')
@@ -33,11 +32,15 @@ player_image = pygame.transform.scale(player_image, (player_image.get_width() * 
 menu_image = pygame.image.load(os.path.join(assets_dir, 'menu.png'))
 menu_scale_factor = 10
 menu_image = pygame.transform.scale(menu_image, (menu_image.get_width() * menu_scale_factor, menu_image.get_height() * menu_scale_factor * 0.75)) #Short height
+
+arrow = pygame.image.load(os.path.join(assets_dir, 'arrow.png'))
+arrow_scale_factor = 5
+arrow = pygame.transform.scale(arrow, (arrow.get_width() * arrow_scale_factor, arrow.get_height() * arrow_scale_factor)) #Short height
+
 # Get the dimensions of the scaled player image to center it
 player_width, player_height = player_image.get_size() 
 
-# Positi
-# on the player image at the bottom right
+# Put player image at the bottom right
 player_x = screen_width - player_width
 player_y = screen_height - player_height - 150#150 higher than bottom
 
@@ -80,6 +83,9 @@ while running:
     screen.fill((255, 255, 255))  # WhiteBG
     # Menu box
     screen.blit(menu_image, (0, 430))
+    
+    #Create the arrow
+    screen.blit(arrow, (0, 475))
 
     #Write text
     render_text("Battle Test", font_title, (0, 0, 0), 300, 50)
@@ -91,6 +97,9 @@ while running:
     #Health Bar
     health_bar_length = 400*health_percent
     health_percent = float(health/max_health)
+    health_fraction = str(health) + "/" + str(max_health)
+    print(health_fraction)
+    time.sleep(0.5)
     health -= 1
     if health_percent > 1:
         health_percent = 1
@@ -99,10 +108,13 @@ while running:
         health = 15
     health_color = ((255-(255*health_percent)),(255*health_percent),0)
     
-    pygame.draw.rect(screen, health_color, (395, 5, health_bar_length, 25))
+    pygame.draw.rect(screen, health_color, (5, 400, health_bar_length, 25))
 
     pygame.display.flip()
 
+
+
+#Making the gam
 
 # Quit Pygame
 pygame.quit()

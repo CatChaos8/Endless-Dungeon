@@ -8,5 +8,5 @@ while True:
     # Read data from Arduino
     data = ser.readline().decode().strip()
     
-    # Simulate key press
+    # Press Key
     pyautogui.typewrite(data)
