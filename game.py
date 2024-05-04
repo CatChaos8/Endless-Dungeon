@@ -43,7 +43,8 @@ player_y = screen_height - player_height - 150#150 higher than bottom
 
 #Base Stats:
 max_health = int(15)
-health = int(15)
+health = int(20)
+health_percent = float(health/max_health)
 melee_dmg = int(5)
 crit_chance = float(0.1)
 crit_amp = float(1.5)
@@ -62,7 +63,7 @@ headshot_description = str("Has 20% accuracy and deals " + headshot_dmg + " dama
 print(headshot_description)
 kick_description = str("Has 95% accuracy and deals "+ kick_dmg +" damage when it hits.")
 print(kick_description)
-toxic_description = str("Has 70% accuracy and deals no dammage on contact, but does "+ toxic_dmg + " every turn for 3 turns.")
+toxic_description = str("Has 70% accuracy and deals no dammage on contact, but does " + toxic_dmg + " every turn for 3 turns.")
 print(toxic_description)
 rest_description = str("Has 70% accuracy and deals no dammage, but heals the user by "+ rest_heal + " health when used.")
 print(rest_description)
@@ -87,7 +88,19 @@ while running:
     render_text("Toxic", font_menu, (255, 255, 255), 250, 475)   #Action 3
     render_text("Rest", font_menu, (255, 255, 255), 250, 545)    #Action 4
 
+    #Health Bar
+    health_bar_length = 400*health_percent
+    health_percent = float(health/max_health)
+    health -= 1
+    if health_percent > 1:
+        health_percent = 1
+    if health_percent <=0 :
+        health_percent = 0
+        health = 15
+    health_color = ((255-(255*health_percent)),(255*health_percent),0)
     
+    pygame.draw.rect(screen, health_color, (395, 5, health_bar_length, 25))
+
     pygame.display.flip()
 
 
