@@ -1,1 +1,1 @@
-This is a roguelike game where you kill things. To attack you have to answer a question correctly. At the end of every battle you get an item that upgrades your stats. 
+This is a roguelike game where you kill things. To attack you have to answer a question correctly. At the end of every battle you get an item that upgrades your stats(Attack, DoT, HP, Heal Amount, & more!)
