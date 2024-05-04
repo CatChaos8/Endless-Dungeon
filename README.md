@@ -1,2 +1,1 @@
-Hi
-This is a readme So you should not read it.
+This is a roguelike game where you kill things. To attack you have to answer a question correctly. At the end of every battle you get an item that upgrades your stats. 

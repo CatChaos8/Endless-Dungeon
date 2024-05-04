@@ -30,13 +30,13 @@ player_image = pygame.transform.scale(player_image, (player_image.get_width() * 
 
 menu_image = pygame.image.load(os.path.join(assets_dir, 'menu.png'))
 menu_scale_factor = 10
-menu_image = pygame.transform.scale(menu_image, (menu_image.get_width() * menu_scale_factor, menu_image.get_height() * menu_scale_factor * 0.75))
-# Get the dimensions of the scaled player image
-player_width, player_height = player_image.get_size()
+menu_image = pygame.transform.scale(menu_image, (menu_image.get_width() * menu_scale_factor, menu_image.get_height() * menu_scale_factor * 0.75)) #Short height
+# Get the dimensions of the scaled player image to center it
+player_width, player_height = player_image.get_size() 
 
 # Position the player image at the bottom right
 player_x = screen_width - player_width
-player_y = screen_height - player_height - 150#150 higher than 
+player_y = screen_height - player_height - 150#150 higher than bottom
 
 # Define box properties
 box_width = 800
