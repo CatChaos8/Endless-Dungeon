@@ -99,6 +99,7 @@ while running:
     screen.fill((255, 255, 255))  # WhiteBG
     # Menu box
     screen.blit(menu_image, (0, 300))
+    screen.blit(menu_image, (0, -300))
     #PLayer
     screen.blit(player_image, (525, 100))
     screen.blit(enemy1_image, (25, 25))
@@ -151,14 +152,16 @@ while running:
     #Health Bar
     health_bar_length = 400*health_percent
     health_percent = float(health/max_health)
-    health_fraction = str(health) + "/" + str(max_health)
+    health_fraction = str(health) + "/" + str(max_health) + " HP"
     if health_percent > 1:
         health_percent = 1
     if health_percent <=0 :
         health_percent = 0
         health = 15
     health_color = ((255-(255*health_percent)),(255*health_percent),0)
-    
+    health -= 1
+    render_text(health_fraction, font_menu, (255, 255, 255), 670, 402)
+
     pygame.draw.rect(screen, health_color, (5, 397, health_bar_length, 25))
 
     pygame.display.flip()
