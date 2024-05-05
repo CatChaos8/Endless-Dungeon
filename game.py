@@ -70,23 +70,10 @@ kick_dmg = str(melee_dmg+3)
 toxic_dmg = str(poison_dmg+7)
 rest_heal = str(heal_amount + 2)
 
-
-headshot_description1 = str("Has 20% accuracy and deals ")
-headshot_description2 = str(headshot_dmg + " damage when it hits.")
-
-kick_description1 = str("Has 95% accuracy and deals ")
-kick_description2 = str(kick_dmg +" damage when it hits.")
-
-toxic_description1 = str("Has 70% accuracy and deals ")
-toxic_description2 = str("toxic")
-toxic_description3 = str("does " + toxic_dmg + " every turn for")
-toxic_description4 = str("3 turns")
-
-rest_description1 = str("Has a 70% chance to ")
-rest_description2 = str("activate and heal the user")
-rest_description3 = str("by "+ rest_heal +" health when used in")                        
-rest_description4 = str("succession.")   
 selected_action = 1
+
+
+
 
 # Main game loop
 running = True
@@ -95,7 +82,21 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    
+    headshot_description1 = str("Has 20% accuracy and deals ")
+    headshot_description2 = str(headshot_dmg + " damage when it hits.")
+
+    kick_description1 = str("Has 95% accuracy and deals ")
+    kick_description2 = str(kick_dmg +" damage when it hits.")
+
+    toxic_description1 = str("Has 70% accuracy and deals ")
+    toxic_description2 = str("toxic")
+    toxic_description3 = str("does " + toxic_dmg + " every turn for")
+    toxic_description4 = str("3 turns")
+
+    rest_description1 = str("Has a 70% chance to ")
+    rest_description2 = str("activate and heal the user")
+    rest_description3 = str("by "+ rest_heal +" health when used in")                        
+    rest_description4 = str("succession.")   
     screen.fill((255, 255, 255))  # WhiteBG
     # Menu box
     screen.blit(menu_image, (0, 300))
@@ -114,7 +115,6 @@ while running:
         arrow_location = (0,470)
         render_text(headshot_description1, font_menu, (255, 255, 255), 375, 500)
         render_text(headshot_description2, font_menu, (255, 255, 255), 375, 525)
-        print(selected_action)
         
     elif selected_action == 2: #Toxic
        
@@ -123,14 +123,12 @@ while running:
         render_text(toxic_description2, font_menu, (255, 255, 255), 375, 500)
         render_text(toxic_description3, font_menu, (255, 255, 255), 375, 525)
         render_text(toxic_description4, font_menu, (255, 255, 255), 375, 550)
-        print(selected_action)
         
     elif selected_action == 3: #Kick
 
         screen.blit(arrow, (0, 535))
         render_text(kick_description1, font_menu, (255, 255, 255), 375, 500)
         render_text(kick_description2, font_menu, (255, 255, 255), 375, 525)
-        print(selected_action)
         
     elif selected_action == 4: #Rest
         
@@ -139,7 +137,6 @@ while running:
         render_text(rest_description2, font_menu, (255, 255, 255), 375, 500)
         render_text(rest_description3, font_menu, (255, 255, 255), 375, 525)
         render_text(rest_description4, font_menu, (255, 255, 255), 375, 550)
-        print(selected_action)
 
 
     #Write text
