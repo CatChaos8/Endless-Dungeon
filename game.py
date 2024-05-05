@@ -9,7 +9,7 @@ pygame.init()
 screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Genius Battle")
+pygame.display.set_caption("Underground Dungeon")
 
 # Choose the font to set up the text
 # Load fonts from assets/fonts folder
@@ -52,6 +52,34 @@ player_width, player_height = player_image.get_size()
 # Put player image at the bottom right
 player_x = screen_width - player_width
 player_y = screen_height - player_height - 150 #150 higher than bottom
+
+def renderSelectedAction():
+    if selected_action == 1: #Headshot
+        screen.blit(arrow, (0, 470))
+        render_text(headshot_description1, font_menu, (255, 255, 255), 375, 500)
+        render_text(headshot_description2, font_menu, (255, 255, 255), 375, 525)
+        
+    elif selected_action == 2: #Toxic
+       
+        screen.blit(arrow, (195, 470))
+        render_text(toxic_description1, font_menu, (255, 255, 255), 375, 475)
+        render_text(toxic_description2, font_menu, (255, 255, 255), 375, 500)
+        render_text(toxic_description3, font_menu, (255, 255, 255), 375, 525)
+        render_text(toxic_description4, font_menu, (255, 255, 255), 375, 550)
+        
+    elif selected_action == 3: #Kick
+
+        screen.blit(arrow, (0, 535))
+        render_text(kick_description1, font_menu, (255, 255, 255), 375, 500)
+        render_text(kick_description2, font_menu, (255, 255, 255), 375, 525)
+        
+    elif selected_action == 4: #Rest
+        
+        screen.blit(arrow, (195, 535))
+        render_text(rest_description1, font_menu, (255, 255, 255), 375, 475)
+        render_text(rest_description2, font_menu, (255, 255, 255), 375, 500)
+        render_text(rest_description3, font_menu, (255, 255, 255), 375, 525)
+        render_text(rest_description4, font_menu, (255, 255, 255), 375, 550)
 
 #Base Stats:
 max_health = int(15)
@@ -107,40 +135,9 @@ while running:
     
     render_text(level_count_str, font_title, (0, 0, 0), 760, 20)
     
-    #Create the arrow and descreption
-    
-    if selected_action == 1: #Headshot
-        
-        screen.blit(arrow, (0, 470))
-        arrow_location = (0,470)
-        render_text(headshot_description1, font_menu, (255, 255, 255), 375, 500)
-        render_text(headshot_description2, font_menu, (255, 255, 255), 375, 525)
-        
-    elif selected_action == 2: #Toxic
-       
-        screen.blit(arrow, (195, 470))
-        render_text(toxic_description1, font_menu, (255, 255, 255), 375, 475)
-        render_text(toxic_description2, font_menu, (255, 255, 255), 375, 500)
-        render_text(toxic_description3, font_menu, (255, 255, 255), 375, 525)
-        render_text(toxic_description4, font_menu, (255, 255, 255), 375, 550)
-        
-    elif selected_action == 3: #Kick
-
-        screen.blit(arrow, (0, 535))
-        render_text(kick_description1, font_menu, (255, 255, 255), 375, 500)
-        render_text(kick_description2, font_menu, (255, 255, 255), 375, 525)
-        
-    elif selected_action == 4: #Rest
-        
-        screen.blit(arrow, (195, 535))
-        render_text(rest_description1, font_menu, (255, 255, 255), 375, 475)
-        render_text(rest_description2, font_menu, (255, 255, 255), 375, 500)
-        render_text(rest_description3, font_menu, (255, 255, 255), 375, 525)
-        render_text(rest_description4, font_menu, (255, 255, 255), 375, 550)
-
-
+    renderSelectedAction()
     #Write text
-    render_text("Genius Battle", font_title, (0, 0, 0), 300, 100)
+    #render_text("Underground Dungeon", font_title, (0, 0, 0), 300, 100)
     render_text("1 Headshot", font_menu, (255, 255, 255), 30, 475) #Action 1
     render_text("3 Kick", font_menu, (255, 255, 255), 30, 540)     #Action 2
     render_text("2 Toxic", font_menu, (255, 255, 255), 230, 475)   #Action 3
@@ -164,16 +161,18 @@ while running:
     time.sleep(0.05)
     pressed_key = pygame.key.get_pressed()
     
-    
-
     if pressed_key[pygame.K_1]:
         selected_action = 1
+        renderSelectedAction()
     elif pressed_key[pygame.K_2]:#s is pressed
         selected_action = 2
+        renderSelectedAction()
     elif pressed_key[pygame.K_3]:#a is pressed
         selected_action = 3
+        renderSelectedAction()
     elif pressed_key[pygame.K_4]:#d is pressed
         selected_action = 4
+        renderSelectedAction()
     if pressed_key[pygame.K_w]:
         if selected_action == 4:
             selected_action = 2
@@ -183,6 +182,8 @@ while running:
             selected_action = 3
         elif selected_action == 2:
             selected_action = 4
+        renderSelectedAction()
+        time.sleep(0.5)
     if pressed_key[pygame.K_s]:
         if selected_action == 4:
             selected_action = 2
@@ -192,6 +193,8 @@ while running:
             selected_action = 3
         elif selected_action == 2:
             selected_action = 4
+        renderSelectedAction()
+        time.sleep(0.5)
     if pressed_key[pygame.K_a]:
         if selected_action == 4:
             selected_action = 3
@@ -201,6 +204,8 @@ while running:
             selected_action = 2
         elif selected_action == 2:
             selected_action = 1
+        renderSelectedAction()
+        time.sleep(0.5)
     if pressed_key[pygame.K_d]:
         if selected_action == 4:
             selected_action = 3
@@ -210,14 +215,10 @@ while running:
             selected_action = 2
         elif selected_action == 2:
             selected_action = 1
-        
-
-
-
-
-
-
+        renderSelectedAction()
+        time.sleep(0.5)
 
 # Quit Pygame
 pygame.quit()
+
 sys.exit()
