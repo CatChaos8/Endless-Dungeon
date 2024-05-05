@@ -2,6 +2,7 @@ import pygame
 import sys
 import os
 import time
+import threading
 # Initialize Pygame
 pygame.init()
 
@@ -9,7 +10,7 @@ pygame.init()
 screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Underground Dungeon")
+pygame.display.set_caption("Eternal Depths")
 
 # Choose the font to set up the text
 # Load fonts from assets/fonts folder
@@ -53,34 +54,6 @@ player_width, player_height = player_image.get_size()
 player_x = screen_width - player_width
 player_y = screen_height - player_height - 150 #150 higher than bottom
 
-def renderSelectedAction():
-    if selected_action == 1: #Headshot
-        screen.blit(arrow, (0, 470))
-        render_text(headshot_description1, font_menu, (255, 255, 255), 375, 500)
-        render_text(headshot_description2, font_menu, (255, 255, 255), 375, 525)
-        
-    elif selected_action == 2: #Toxic
-       
-        screen.blit(arrow, (195, 470))
-        render_text(toxic_description1, font_menu, (255, 255, 255), 375, 475)
-        render_text(toxic_description2, font_menu, (255, 255, 255), 375, 500)
-        render_text(toxic_description3, font_menu, (255, 255, 255), 375, 525)
-        render_text(toxic_description4, font_menu, (255, 255, 255), 375, 550)
-        
-    elif selected_action == 3: #Kick
-
-        screen.blit(arrow, (0, 535))
-        render_text(kick_description1, font_menu, (255, 255, 255), 375, 500)
-        render_text(kick_description2, font_menu, (255, 255, 255), 375, 525)
-        
-    elif selected_action == 4: #Rest
-        
-        screen.blit(arrow, (195, 535))
-        render_text(rest_description1, font_menu, (255, 255, 255), 375, 475)
-        render_text(rest_description2, font_menu, (255, 255, 255), 375, 500)
-        render_text(rest_description3, font_menu, (255, 255, 255), 375, 525)
-        render_text(rest_description4, font_menu, (255, 255, 255), 375, 550)
-
 #Base Stats:
 max_health = int(15)
 health = int(15)
@@ -99,12 +72,102 @@ toxic_dmg = str(poison_dmg+7)
 rest_heal = str(heal_amount + 2)
 
 selected_action = 1
+last_key_event_timew = 0
+last_key_event_times = 0
+last_key_event_timea = 0
+last_key_event_timed = 0
+pressed_key = pygame.key.get_pressed()
+running = True
 
+def keyPressedw():
+    global selected_action, last_key_event_timew, pressed_key
+    current_time = time.time()
+    # Check if any of the movement keys are pressed
+    pressed_key = pygame.key.get_pressed()
+    if pressed_key[pygame.K_w]:
+        # Check if enough time has passed since the last key event
+        if current_time - last_key_event_timew > 0.25:
+            if pressed_key[pygame.K_w]:
+                if selected_action == 4:
+                    selected_action = 2
+                elif selected_action == 3:
+                    selected_action = 1
+                elif selected_action == 1:
+                    selected_action = 3
+                elif selected_action == 2:
+                    selected_action = 4
+            # Update the last key event time
+            last_key_event_timew = current_time
+    else:
+        last_key_event_timew = 0.3
+def keyPresseds():
+    global selected_action, last_key_event_times, pressed_key
+    current_time = time.time()
+    # Check if any of the movement keys are pressed
+    pressed_key = pygame.key.get_pressed()
+    if pressed_key[pygame.K_s]:
+        # Check if enough time has passed since the last key event
+        if current_time - last_key_event_times > 0.25:
+            if pressed_key[pygame.K_s]:
+                if selected_action == 4:
+                    selected_action = 2
+                elif selected_action == 3:
+                    selected_action = 1
+                elif selected_action == 1:
+                    selected_action = 3
+                elif selected_action == 2:
+                    selected_action = 4
+            # Update the last key event time
+            last_key_event_times = current_time
+    else:
+        last_key_event_times = 0.3
 
+def keyPresseda():
+    global selected_action, last_key_event_timea, pressed_key
+    current_time = time.time()
+    # Check if any of the movement keys are pressed
+    pressed_key = pygame.key.get_pressed()
+    if  pressed_key[pygame.K_a]:
+        # Check if enough time has passed since the last key event
+        if current_time - last_key_event_timea > 0.25:
+            if pressed_key[pygame.K_a]:
+                if selected_action == 4:
+                    selected_action = 3
+                elif selected_action == 3:
+                    selected_action = 4
+                elif selected_action == 1:
+                    selected_action = 2
+                elif selected_action == 2:
+                    selected_action = 1
+            # Update the last key event time
+            last_key_event_timea = current_time
+    else:
+        last_key_event_timea = 0.3
+
+def keyPressedd():
+    global selected_action, last_key_event_timed, pressed_key
+    current_time = time.time()
+    # Check if any of the movement keys are pressed
+    pressed_key = pygame.key.get_pressed()
+    if pressed_key[pygame.K_d]:
+        # Check if enough time has passed since the last key event
+        if current_time - last_key_event_timed > 0.25:
+            if pressed_key[pygame.K_d]:
+                if selected_action == 4:
+                    selected_action = 3
+                elif selected_action == 3:
+                    selected_action = 4
+                elif selected_action == 1:
+                    selected_action = 2
+                elif selected_action == 2:
+                    selected_action = 1
+            # Update the last key event time
+            last_key_event_timed = current_time
+    else:
+        last_key_event_timed = 0.3
 
 
 # Main game loop
-running = True
 while running:
     
     for event in pygame.event.get():
@@ -135,9 +198,40 @@ while running:
     
     render_text(level_count_str, font_title, (0, 0, 0), 760, 20)
     
-    renderSelectedAction()
+    #Create the arrow and descreption
+    
+    if selected_action == 1: #Headshot
+        
+        screen.blit(arrow, (0, 470))
+        arrow_location = (0,470)
+        render_text(headshot_description1, font_menu, (255, 255, 255), 375, 500)
+        render_text(headshot_description2, font_menu, (255, 255, 255), 375, 525)
+        
+    elif selected_action == 2: #Toxic
+       
+        screen.blit(arrow, (195, 470))
+        render_text(toxic_description1, font_menu, (255, 255, 255), 375, 475)
+        render_text(toxic_description2, font_menu, (255, 255, 255), 375, 500)
+        render_text(toxic_description3, font_menu, (255, 255, 255), 375, 525)
+        render_text(toxic_description4, font_menu, (255, 255, 255), 375, 550)
+        
+    elif selected_action == 3: #Kick
+
+        screen.blit(arrow, (0, 535))
+        render_text(kick_description1, font_menu, (255, 255, 255), 375, 500)
+        render_text(kick_description2, font_menu, (255, 255, 255), 375, 525)
+        
+    elif selected_action == 4: #Rest
+        
+        screen.blit(arrow, (195, 535))
+        render_text(rest_description1, font_menu, (255, 255, 255), 375, 475)
+        render_text(rest_description2, font_menu, (255, 255, 255), 375, 500)
+        render_text(rest_description3, font_menu, (255, 255, 255), 375, 525)
+        render_text(rest_description4, font_menu, (255, 255, 255), 375, 550)
+
+
     #Write text
-    #render_text("Underground Dungeon", font_title, (0, 0, 0), 300, 100)
+    #render_text("Eternal Depths", font_title, (0, 0, 0), 300, 100)
     render_text("1 Headshot", font_menu, (255, 255, 255), 30, 475) #Action 1
     render_text("3 Kick", font_menu, (255, 255, 255), 30, 540)     #Action 2
     render_text("2 Toxic", font_menu, (255, 255, 255), 230, 475)   #Action 3
@@ -160,63 +254,23 @@ while running:
     
     time.sleep(0.05)
     pressed_key = pygame.key.get_pressed()
-    
+
+    keyPresseda()
+    keyPresseds()
+    keyPressedd()
+    keyPressedw()
+
     if pressed_key[pygame.K_1]:
         selected_action = 1
-        renderSelectedAction()
     elif pressed_key[pygame.K_2]:#s is pressed
         selected_action = 2
-        renderSelectedAction()
     elif pressed_key[pygame.K_3]:#a is pressed
         selected_action = 3
-        renderSelectedAction()
     elif pressed_key[pygame.K_4]:#d is pressed
         selected_action = 4
-        renderSelectedAction()
-    if pressed_key[pygame.K_w]:
-        if selected_action == 4:
-            selected_action = 2
-        elif selected_action == 3:
-            selected_action = 1
-        elif selected_action == 1:
-            selected_action = 3
-        elif selected_action == 2:
-            selected_action = 4
-        renderSelectedAction()
-        time.sleep(0.5)
-    if pressed_key[pygame.K_s]:
-        if selected_action == 4:
-            selected_action = 2
-        elif selected_action == 3:
-            selected_action = 1
-        elif selected_action == 1:
-            selected_action = 3
-        elif selected_action == 2:
-            selected_action = 4
-        renderSelectedAction()
-        time.sleep(0.5)
-    if pressed_key[pygame.K_a]:
-        if selected_action == 4:
-            selected_action = 3
-        elif selected_action == 3:
-            selected_action = 4
-        elif selected_action == 1:
-            selected_action = 2
-        elif selected_action == 2:
-            selected_action = 1
-        renderSelectedAction()
-        time.sleep(0.5)
-    if pressed_key[pygame.K_d]:
-        if selected_action == 4:
-            selected_action = 3
-        elif selected_action == 3:
-            selected_action = 4
-        elif selected_action == 1:
-            selected_action = 2
-        elif selected_action == 2:
-            selected_action = 1
-        renderSelectedAction()
-        time.sleep(0.5)
+
+
+        
 
 # Quit Pygame
 pygame.quit()
